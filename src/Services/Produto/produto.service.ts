@@ -1,9 +1,8 @@
-import { produto_schema } from "./produto.validation";
 import { ICreateProduto, IUpdateProduto } from "../../types/IProduto.types";
 import { IProduto } from "../../types/IProduto.types";
 import { ModelProduto } from "../../Models/ProdutoSchema.models";
 
-export const buscar_produtos = async (): Promise<IProduto[] | null> => {
+export async function buscar_produtos(): Promise<IProduto[] | null>  {
 
     try {
 
@@ -17,7 +16,7 @@ export const buscar_produtos = async (): Promise<IProduto[] | null> => {
     };
 }
 
-export const buscar_produto_id = async (id_produto: string): Promise<IProduto | null> => {
+export async function buscar_produto_id(id_produto: string): Promise<IProduto | null> {
 
     try {
 
@@ -31,7 +30,7 @@ export const buscar_produto_id = async (id_produto: string): Promise<IProduto | 
     };
 }
 
-export const criar_produto = async (data: ICreateProduto): Promise<IProduto | null> => {
+export async function criar_produto(data: ICreateProduto): Promise<IProduto | null>  {
 
     try {
 
@@ -46,7 +45,7 @@ export const criar_produto = async (data: ICreateProduto): Promise<IProduto | nu
     };
 };
 
-export const atualizar_produto = async (id_produto: string, data_atualizado: IUpdateProduto): Promise<IProduto | null> => {
+export async function atualizar_produto(id_produto: string, data_atualizado: IUpdateProduto): Promise<IProduto | null> {
 
     try {
 
@@ -59,12 +58,11 @@ export const atualizar_produto = async (id_produto: string, data_atualizado: IUp
     };
 }
 
-export const deletar_produto = async (id_produto: string): Promise<IProduto | null> => {
+export async function deletar_produto(id_produto: string): Promise<void> {
 
     try {
 
         const produto = await ModelProduto.findByIdAndDelete(id_produto);
-        return produto;
         
     } catch (erro) {
   

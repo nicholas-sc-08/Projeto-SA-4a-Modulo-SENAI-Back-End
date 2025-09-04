@@ -16,6 +16,6 @@ export interface ISacola {
     tamanho: string,
     composicao: string,
     fk_id_brecho: string,
-    fk_id_marca: string,
-    quantidade_selecionada?: number
+    fk_id_marca?: string,
+    quantidade_selecionada: number
 }
