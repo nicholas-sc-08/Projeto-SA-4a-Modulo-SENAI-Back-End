@@ -8,6 +8,13 @@ export interface ICor {
     cor_tres?: string
 }
 
+export interface ICreateCor {
+
+    cor_um: string,
+    cor_dois?: string,
+    cor_tres?: string
+}
+
 export interface IUpdateCor {
 
     cor_um?: string,

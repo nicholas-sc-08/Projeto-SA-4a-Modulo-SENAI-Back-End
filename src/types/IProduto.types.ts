@@ -1,5 +1,5 @@
-import { ICor } from "./Icor.types";
-import { Iphotos } from "./Iphotos.types";
+import { ICor, ICreateCor, IUpdateCor } from "./Icor.types";
+import { ICreatePhoto, IPhoto, IUpdatePhoto } from "./Iphotos.types";
 import { ObjectId } from "mongoose";
 import { Types } from "mongoose";
 
@@ -9,8 +9,8 @@ export interface IProduto {
     nome: string,
     preco: number,
     condicao: string,
-    imagem: Array<Iphotos>,
-    cor: Array<ICor>,
+    imagem: IPhoto[],
+    cor: ICor[],
     marca?: string,
     fk_id_categoria?: string,
     quantidade: number,
@@ -26,8 +26,8 @@ export interface ICreateProduto {
     nome: string,
     preco: number,
     condicao: string,
-    imagem: Array<Iphotos>,
-    cor: Array<ICor>,
+    imagem: ICreatePhoto[],
+    cor: ICreateCor[],
     marca?: string,
     fk_id_categoria?: string,
     quantidade: number,
@@ -43,8 +43,8 @@ export interface IUpdateProduto {
     nome?: string,
     preco?: number,
     condicao?: string,
-    imagem?: Array<Iphotos>,
-    cor?: Array<ICor>,
+    imagem?: IUpdatePhoto[],
+    cor?: IUpdateCor[],
     marca?: string,
     fk_id_categoria?: string,
     quantidade?: number,
