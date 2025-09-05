@@ -2,7 +2,7 @@ import { Types } from "mongoose"
 
 export interface IEndereco {
 
-    _id: Types.ObjectId,
+    _id?: Types.ObjectId,
     cep: string,
     bairro: string,
     logradouro: string,

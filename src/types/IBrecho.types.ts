@@ -4,7 +4,7 @@ import { Types } from "mongoose";
 
 export interface IBrecho {
 
-    _id: Types.ObjectId,
+    _id?: Types.ObjectId,
     nome_vendedor: string,
     data_de_nascimento_vendedor: Date,
     nome_brecho: string,
@@ -14,8 +14,8 @@ export interface IBrecho {
     cnpj: string,
     logo: string,
     horario_funcionamento?: string,
-    conversas?: Array<IConversas>,
-    buscas_recentes?: Array<IBuscasRecentes>,
+    conversas?: IConversas[],
+    buscas_recentes?: IBuscasRecentes[],
     createdAt?: Date,
     updatedAt?: Date,
 }
@@ -31,8 +31,8 @@ export interface ICreateBrecho {
     cnpj: string,
     logo: string,
     horario_funcionamento?: string,
-    conversas?: Array<IConversas>,
-    buscas_recentes?: Array<IBuscasRecentes>,
+    conversas?: IConversas[],
+    buscas_recentes?: IBuscasRecentes[],
     createdAt?: Date,
     updatedAt?: Date,
 }
@@ -48,8 +48,8 @@ export interface IUpdateBrecho {
     cnpj?: string,
     logo?: string,
     horario_funcionamento?: string,
-    conversas?: Array<IConversas>,
-    buscas_recentes?: Array<IBuscasRecentes>,
+    conversas?: IConversas[],
+    buscas_recentes?: IBuscasRecentes[],
     createdAt?: Date,
     updatedAt?: Date,
 }

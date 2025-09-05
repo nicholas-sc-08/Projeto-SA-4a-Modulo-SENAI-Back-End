@@ -5,7 +5,7 @@ import { Types } from "mongoose";
 
 export interface IProduto {
 
-    _id: Types.ObjectId,
+    _id?: Types.ObjectId,
     nome: string,
     preco: number,
     condicao: string,

@@ -2,7 +2,7 @@ import { Types } from "mongoose"
 
 export interface IPhoto {
 
-    _id: Types.ObjectId,
+    _id?: Types.ObjectId,
     imagem_um: string,
     imagem_dois?: string,
     imagem_tres?: string

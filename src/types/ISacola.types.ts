@@ -1,14 +1,14 @@
 import { ICor } from "./Icor.types";
-import { Iphotos } from "./Iphotos.types";
+import { IPhoto } from "./Iphotos.types";
 
 export interface ISacola {
 
-    _id: string,
+    _id?: string,
     nome: string,
     preco: number,
     condicao: string,
-    imagem: Array<Iphotos>,
-    cor: Array<ICor>,
+    imagem: IPhoto[],
+    cor: ICor[],
     marca?: string,
     fk_id_categoria: string,
     quantidade: number,

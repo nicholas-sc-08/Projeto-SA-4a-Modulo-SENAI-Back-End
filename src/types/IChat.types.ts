@@ -2,7 +2,7 @@ import { Types } from "mongoose"
 
 export interface IChat {
 
-    _id: Types.ObjectId,
+    _id?: Types.ObjectId,
     mensagem: string,
     hora: string,
     data_mensagem: Date,

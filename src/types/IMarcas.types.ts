@@ -2,7 +2,7 @@ import { Types } from "mongoose"
 
 export interface IMarcas {
 
-    _id: Types.ObjectId,
+    _id?: Types.ObjectId,
     logo_marca: string,
     createdAt?: Date,
     updatedAt?: Date

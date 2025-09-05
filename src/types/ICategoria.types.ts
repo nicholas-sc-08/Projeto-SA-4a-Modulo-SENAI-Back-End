@@ -2,7 +2,7 @@ import { Types } from "mongoose"
 
 export interface ICategoria {
 
-    _id: Types.ObjectId,
+    _id?: Types.ObjectId,
     nome: string,
     sub_categoria: boolean,
     createdAt?: Date,
