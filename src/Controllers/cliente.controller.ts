@@ -47,6 +47,8 @@ export async function post_cliente(req: Request, res: Response) {
 
     try {
 
+        req.body.data_de_nascimento = new Date(req.body.data_de_nascimento);
+
         const cliente = cliente_schema.parse(req.body);
         const novo_cliente = await ServicoCliente.cadastrar_cliente(cliente);
         res.status(201).json(novo_cliente);
