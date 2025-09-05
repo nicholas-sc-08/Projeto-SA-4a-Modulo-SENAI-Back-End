@@ -13,7 +13,7 @@ export interface ICliente {
     cpf: string,
     data_de_nascimento: Date,
     imagem_de_perfil: string,
-    conversas?: IBuscasRecentes[],
+    conversas?: IConversas[],
     buscas_recentes?: IBuscasRecentes[],
     sacola?: ISacola[],
     produtos_comprados?: ISacola[],
