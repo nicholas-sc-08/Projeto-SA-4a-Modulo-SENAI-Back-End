@@ -16,3 +16,5 @@ export const brecho_schema = z.object({
     conversas: z.array(conversas_schema).optional(),
     buscas_recentes: z.array(buscas_recentes_schema)
 });
+
+export const brecho_update_schema = brecho_schema.partial();

@@ -17,3 +17,5 @@ export const cliente_schema = z.object({
     sacola: z.array(sacola_schema).optional(),
     produtos_comprados: z.array(sacola_schema),
 });
+
+export const cliente_update_schema = cliente_schema.partial();
