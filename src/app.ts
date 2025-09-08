@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import router_produto from "./Routes/router.produto";
 import router_cliente from "./Routes/router.cliente";
 import router_categoria from "./Routes/router.categoria";
@@ -9,6 +10,7 @@ import router_marca from "./Routes/router.marca";
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 app.use(`/produtos`, router_produto);
 app.use(`/clientes`, router_cliente);
 app.use(`/categorias`, router_categoria);
