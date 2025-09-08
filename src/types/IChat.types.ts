@@ -7,7 +7,7 @@ export interface IChat {
     hora: string,
     data_mensagem: Date,
     id_dono_mensagem: string,
-    id_quem_recebeu_imagem: string,
+    id_quem_recebeu_mensagem: string,
     mensagem_lida_quem_recebeu: boolean,
     createdAt?: Date,
     updatedAt?: Date
@@ -19,10 +19,8 @@ export interface ICreateChat {
     hora: string,
     data_mensagem: Date,
     id_dono_mensagem: string,
-    id_quem_recebeu_imagem: string,
+    id_quem_recebeu_mensagem: string,
     mensagem_lida_quem_recebeu: boolean,
-    createdAt?: Date,
-    updatedAt?: Date
 }
 
 export interface IUpdateChat {
@@ -31,7 +29,7 @@ export interface IUpdateChat {
     hora?: string,
     data_mensagem?: Date,
     id_dono_mensagem?: string,
-    id_quem_recebeu_imagem?: string,
+    id_quem_recebeu_mensagem?: string,
     mensagem_lida_quem_recebeu?: boolean,
     createdAt?: Date,
     updatedAt?: Date

@@ -8,7 +8,7 @@ const chat_schema = new Schema<ICreateChat>({
     hora: { type: String, required: true },
     data_mensagem: { type: Date, required: true },
     id_dono_mensagem: { type: String, required: true },
-    id_quem_recebeu_imagem: { type: String, required: true },
+    id_quem_recebeu_mensagem: { type: String, required: true },
     mensagem_lida_quem_recebeu: { type: Boolean, required: true },
 }, { timestamps: true });
 
