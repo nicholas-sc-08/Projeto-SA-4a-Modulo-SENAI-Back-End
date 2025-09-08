@@ -1,5 +1,6 @@
 import { IBrecho, ICreateBrecho, IUpdateBrecho } from "../../types/IBrecho.types";
 import { ModelBrecho } from "../../Models/BrechoSchema.models";
+import bcrypt from "bcrypt";
 
 export async function buscar_brechos(): Promise<IBrecho[] | null> {
 
@@ -34,6 +35,10 @@ export async function cadastrar_brecho(data_brecho: ICreateBrecho): Promise<IBre
     try {
 
         const brecho = new ModelBrecho(data_brecho);
+
+        const senha_criptografada : string = await bcrypt.hash(data_brecho.senha, 10);
+        data_brecho.senha = senha_criptografada;
+
         const salvar_brecho = brecho.save();
         return salvar_brecho;
 
