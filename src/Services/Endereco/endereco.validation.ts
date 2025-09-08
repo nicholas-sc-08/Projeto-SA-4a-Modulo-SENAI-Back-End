@@ -12,3 +12,5 @@ export const endereco_schema = z.object({
     fk_id_brecho: z.string().optional(),
     fk_id_cliente: z.string().optional()
 });
+
+export const endereco_update_schema = endereco_schema.partial();

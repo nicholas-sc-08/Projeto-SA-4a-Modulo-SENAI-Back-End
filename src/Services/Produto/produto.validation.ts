@@ -19,3 +19,5 @@ export const produto_schema = z.object({
     fk_id_marca: z.string().optional(),
     fk_id_brecho: z.string()
 });
+
+export const produto_update_schema = produto_schema.partial();

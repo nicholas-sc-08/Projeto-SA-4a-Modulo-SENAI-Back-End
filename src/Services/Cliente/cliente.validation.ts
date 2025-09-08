@@ -15,5 +15,7 @@ export const cliente_schema = z.object({
     conversas: z.array(conversas_schema).optional(),
     buscas_recentes: z.array(buscas_recentes_schema).optional(),
     sacola: z.array(sacola_schema).optional(),
-    produtos_comprados: z.array(sacola_schema),
+    produtos_comprados: z.array(sacola_schema).optional(),
 });
+
+export const cliente_update_schema = cliente_schema.partial();

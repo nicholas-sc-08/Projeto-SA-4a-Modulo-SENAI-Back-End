@@ -1,14 +1,16 @@
 import { model } from "mongoose";
 import { Schema } from "mongoose";
 import { ICreateProduto } from "../types/IProduto.types";
+import { photo_schema } from "./PhotoSchema.models";
+import { cor_schema } from "./CorSchema.models";
 
 const produto_schema = new Schema<ICreateProduto>({
 
     nome: { type: String, required: true },
     preco: { type: Number, required: true },
     condicao: { type: String, required: true},
-    imagem: { typeof: Array, required: true },
-    cor: { typeof: Array, required: true },
+    imagem: { type: [photo_schema], required: true },
+    cor: { type: [cor_schema], required: true },
     marca: { type: String, required: false },
     fk_id_categoria: { type: String, required: false },
     quantidade: { type: Number, required: true },

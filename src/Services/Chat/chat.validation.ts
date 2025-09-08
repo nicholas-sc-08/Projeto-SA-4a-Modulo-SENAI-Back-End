@@ -9,3 +9,5 @@ export const chat_schema = z.object({
     id_dono_quem_recebeu: z.string(),
     mensagem_lida_quem_recebeu: z.boolean()
 });
+
+export const chat_update_schema = chat_schema.partial();

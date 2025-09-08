@@ -1,6 +1,6 @@
 export interface IConversas {
 
-    _id: string,
+    _id?: string,
     nome_brecho?: string,
     nome?: string,
     logo?: string,
