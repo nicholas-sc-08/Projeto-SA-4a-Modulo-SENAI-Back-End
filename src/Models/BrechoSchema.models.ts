@@ -14,7 +14,7 @@ const brecho_schema = new Schema<ICreateBrecho>({
     logo: { type: String, required: true },
     horario_funcionamento: { type: String, required: false },
     conversas: { type: Array, required: false },
-    buscas_recentes: { type: Array, required: false }
+    buscas_recentes: { type: Array, required: false },
 });
 
 export const ModelBrecho = model<ICreateBrecho>(`Brecho`, brecho_schema);
