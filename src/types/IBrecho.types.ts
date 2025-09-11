@@ -17,7 +17,6 @@ export interface IBrecho {
     horario_funcionamento?: string,
     conversas?: IConversas[],
     buscas_recentes?: IBuscasRecentes[],
-    sacola: IPayload[];
     
     createdAt?: Date,
     updatedAt?: Date,
