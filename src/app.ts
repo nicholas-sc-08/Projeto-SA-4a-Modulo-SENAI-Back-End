@@ -6,11 +6,15 @@ import router_categoria from "./Routes/router.categoria";
 import router_brecho from "./Routes/router.brecho";
 import router_chat from "./Routes/router.chat";
 import router_marca from "./Routes/router.marca";
+import router_upload from "./Routes/router.upload";
+import router_pedido from "./Routes/router.pedido";
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use(`/api`, router_upload);
+app.use(`/pedidos`, router_pedido);
 app.use(`/produtos`, router_produto);
 app.use(`/clientes`, router_cliente);
 app.use(`/categorias`, router_categoria);

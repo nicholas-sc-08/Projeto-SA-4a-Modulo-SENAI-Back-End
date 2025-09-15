@@ -1,6 +1,7 @@
 import { IBuscasRecentes } from "./IBuscasRecentes.types";
 import { IConversas } from "./IConversas.types";
 import { Types } from "mongoose";
+import { IPayload } from "./IPayload.types";
 
 export interface IBrecho {
 
@@ -16,6 +17,7 @@ export interface IBrecho {
     horario_funcionamento?: string,
     conversas?: IConversas[],
     buscas_recentes?: IBuscasRecentes[],
+    
     createdAt?: Date,
     updatedAt?: Date,
 }

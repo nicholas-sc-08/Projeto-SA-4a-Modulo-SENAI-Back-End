@@ -1,0 +1,15 @@
+import { z } from "zod";
+import { pedido_schema } from "./pedido.validation";
+
+export const pedido_completo_schema = z.object({
+
+    payload: z.object({
+
+        orderId: z.string(),
+        order: pedido_schema,
+        sku: z.string()
+    }),
+    callbackUrl: z.string()
+});
+
+export type PedidoCompletoType = z.infer<typeof pedido_completo_schema>;
