@@ -12,4 +12,4 @@ export const pedido_completo_schema = z.object({
     callbackUrl: z.string()
 });
 
-export type PedidoCompletoType = z.infer<typeof pedido_completo_schema>;
+export const pedido_completo_schema_update = pedido_completo_schema.partial();

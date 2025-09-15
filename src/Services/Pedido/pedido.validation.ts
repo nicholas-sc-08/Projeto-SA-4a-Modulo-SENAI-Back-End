@@ -9,4 +9,4 @@ export const pedido_schema = z.object({
     bloco3: bloco_schema.optional()
 });
 
-export type PedidoType = z.infer<typeof pedido_schema>;
+export const pedido_schema_update = pedido_schema.partial();
