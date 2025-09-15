@@ -8,3 +8,14 @@ export interface Bloco {
     padrao2: string,
     padrao3: string,
 };
+
+export interface BlocoUpdate {
+
+    cor?: number,
+    lamina1?: number,
+    lamina2?: number,
+    lamina3?: number,
+    padrao1?: string,
+    padrao2?: string,
+    padrao3?: string,
+};
