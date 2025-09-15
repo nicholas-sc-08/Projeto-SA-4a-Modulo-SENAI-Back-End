@@ -1,7 +1,27 @@
 import { Request, Response } from "express";
 import { pedido_completo_schema } from "../Services/Pedido/pedido_completo.validation";
-import { enviar_pedido } from "../Services/Pedido/pedido.services";
+import * as ServicePedido from "../Services/Pedido/pedido.services";
 import { IPayload } from "../types/IPayload.types";
+
+export async function get_pedidos(req: Request, res: Response) {
+
+    try {
+
+        const pedidos = await ServicePedido.buscar_pedidos();
+
+        if(!pedidos) {
+
+            res.status(404).json({message: `Pedidos não encontrados!`});
+        } else {
+
+            res.status(200).json(pedidos);
+        };
+        
+    } catch (erro: any) {
+      
+        res.status(500).json({message: erro.message});
+    };
+};
 
 export async function post_pedido(req: Request, res: Response) {
 
@@ -23,7 +43,7 @@ export async function post_pedido(req: Request, res: Response) {
         } else {
 
 
-            const pedido_enviado = await enviar_pedido(validar_pedido);
+            const pedido_enviado = await ServicePedido.enviar_pedido(validar_pedido);
             res.status(201).json(pedido_enviado);
         };
 

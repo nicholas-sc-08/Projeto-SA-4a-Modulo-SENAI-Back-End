@@ -10,3 +10,5 @@ export const bloco_schema = z.object({
     padrao2: z.string(),
     padrao3: z.string()
 });
+
+export const bloco_schema_update = bloco_schema.partial();
