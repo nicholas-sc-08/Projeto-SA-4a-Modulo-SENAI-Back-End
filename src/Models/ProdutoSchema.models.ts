@@ -9,7 +9,7 @@ const produto_schema = new Schema<ICreateProduto>({
     nome: { type: String, required: true },
     preco: { type: Number, required: true },
     condicao: { type: String, required: true},
-    imagem: { type: [photo_schema], required: true },
+    imagem: { type: [String], required: true },
     cor: { type: [cor_schema], required: true },
     marca: { type: String, required: false },
     fk_id_categoria: { type: String, required: false },
