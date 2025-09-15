@@ -1,8 +1,11 @@
-import { IOrder } from "./IOrder.types";
+import { IPedido } from "./IPedido.types";
 
 export interface IPayload {
 
-    orderId: string,
-    order: IOrder,
-    sku: string,
+    payload: {
+        orderId: string,
+        sku: string,
+        order: IPedido
+    };
+    callbackUrl: string
 };
