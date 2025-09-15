@@ -23,6 +23,27 @@ export async function get_pedidos(req: Request, res: Response) {
     };
 };
 
+export async function get_pedido(req: Request, res: Response) {
+
+    try {
+
+        const { id } = req.params;
+        const pedido = await ServicePedido.buscar_pedido_pelo_id(id);
+
+        if(!pedido) {
+
+            res.status(404).json({message: `Pedido não encontrado!`});
+        } else {
+
+            res.status(200).json(pedido);
+        };
+        
+    } catch (erro: any) {
+      
+        res.status(500).json({message: erro.message});
+    };
+};
+
 export async function post_pedido(req: Request, res: Response) {
 
     try {

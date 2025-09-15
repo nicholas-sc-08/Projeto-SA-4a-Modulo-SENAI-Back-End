@@ -15,6 +15,20 @@ export async function buscar_pedidos(): Promise<IPayload[] | null>{
     };
 };
 
+export async function buscar_pedido_pelo_id(id_payload: string): Promise<IPayload | null> {
+
+    try {
+
+        const resposta = await axios.get(`http://52.1.197.112:3000/queue/items/${id_payload}`);
+        return resposta.data;
+        
+    } catch (erro: any) {
+      
+        console.error(erro);
+        throw new Error(`Erro ao buscar o produto pelo ID`);
+    };
+};
+
 export async function enviar_pedido(payload: IPayload): Promise<IPayload | null>{
 
     try {
