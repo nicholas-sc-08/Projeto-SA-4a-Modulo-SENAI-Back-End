@@ -13,4 +13,4 @@ const sacola_brecho_schema = new Schema<ICreateSacolaBrecho>({
     id_brecho: { type: String, required: true }
 });
 
-export const ModelSacolaBrecho = model<ICreateSacolaBrecho>(`sacola_brechos`, sacola_brecho_schema);
+export const ModelSacolaBrecho = model<ICreateSacolaBrecho>(`sacolas_brechos`, sacola_brecho_schema);
