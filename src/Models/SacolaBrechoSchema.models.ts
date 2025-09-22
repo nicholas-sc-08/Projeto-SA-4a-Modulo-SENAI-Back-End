@@ -4,7 +4,7 @@ import { ICreateSacolaBrecho } from "../types/ISacola.types";
 
 const sacola_brecho_schema = new Schema<ICreateSacolaBrecho>({
 
-    tipo: { type: Number, required: true },
+    tipo: { type: String, required: true },
     material: { type: String, required: true },
     padrao: { type: String, required: true },
     cor_corpo: { type: String, required: false },
