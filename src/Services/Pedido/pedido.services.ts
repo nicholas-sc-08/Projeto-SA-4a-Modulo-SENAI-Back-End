@@ -61,7 +61,7 @@ export async function deletar_pedido(id_payload: string): Promise<void> {
 
     try {
 
-        const pedido = await axios.delete(`http://52.1.197.112:3000/queue/items/${id_payload}`);
+        const pedido = await axios.delete(`http://52.1.197.112:3000/queue/items/${id_payload}`)
                 
     } catch (erro: any) {
       
