@@ -56,3 +56,16 @@ export async function atualizar_pedido(id_payload: string, payload: IPayloadUpda
         throw new Error(`Erro ao atualizar o pedido`);
     };
 };
+
+export async function deletar_pedido(id_payload: string): Promise<void> {
+
+    try {
+
+        const pedido = await axios.delete(`http://52.1.197.112:3000/queue/items/${id_payload}`)
+                
+    } catch (erro: any) {
+      
+        console.error(erro);
+        throw new Error(`Erro ao deletar o pedido`);
+    };
+};

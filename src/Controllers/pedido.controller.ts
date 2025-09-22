@@ -9,17 +9,17 @@ export async function get_pedidos(req: Request, res: Response) {
 
         const pedidos = await ServicePedido.buscar_pedidos();
 
-        if(!pedidos) {
+        if (!pedidos) {
 
-            res.status(404).json({message: `Pedidos não encontrados!`});
+            res.status(404).json({ message: `Pedidos não encontrados!` });
         } else {
 
             res.status(200).json(pedidos);
         };
-        
+
     } catch (erro: any) {
-      
-        res.status(500).json({message: erro.message});
+
+        res.status(500).json({ message: erro.message });
     };
 };
 
@@ -30,17 +30,17 @@ export async function get_pedido(req: Request, res: Response) {
         const { id } = req.params;
         const pedido = await ServicePedido.buscar_pedido_pelo_id(id);
 
-        if(!pedido) {
+        if (!pedido) {
 
-            res.status(404).json({message: `Pedido não encontrado!`});
+            res.status(404).json({ message: `Pedido não encontrado!` });
         } else {
 
             res.status(200).json(pedido);
         };
-        
+
     } catch (erro: any) {
-      
-        res.status(500).json({message: erro.message});
+
+        res.status(500).json({ message: erro.message });
     };
 };
 
@@ -51,7 +51,7 @@ export async function post_pedido(req: Request, res: Response) {
         const { payload } = req.body;
 
         const payload_completo: IPayload = {
-            
+
             payload,
             callbackUrl: `http://localhost:3333/callback`
         };
@@ -81,17 +81,31 @@ export async function put_pedido(req: Request, res: Response) {
         const data = req.body;
         const validar_pedido = pedido_completo_schema_update.parse(data);
 
-        if(!validar_pedido) {
+        if (!validar_pedido) {
 
-            res.status(401).json({message: `Formato do pedido não está valido para atualizar!`});
+            res.status(401).json({ message: `Formato do pedido não está valido para atualizar!` });
         } else {
 
             const pedido = await ServicePedido.atualizar_pedido(id, data);
             res.status(200).json(pedido);
         };
-        
+
     } catch (erro: any) {
-      
-        res.status(500).json({message: erro.message});
+
+        res.status(500).json({ message: erro.message });
+    };
+};
+
+export async function delete_pedido(req: Request, res: Response) {
+
+    try {
+
+        const { id } = req.params;
+        const deletar_pedido = await ServicePedido.deletar_pedido(id);
+        res.status(200).json({ message: `Pedido excluído com sucesso!` });
+
+    } catch (erro: any) {
+
+        res.status(500).json({ message: erro.message });
     };
 };
