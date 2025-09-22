@@ -1,5 +1,5 @@
 import { ISacolaBrecho } from "../types/ISacola.types";
-import { tipo_do_pedido_brecho } from "./enums.utils";
+import { cor_bloco, tipo_do_pedido_brecho } from "./enums.utils";
 import { andares_pedido } from "./enums.utils";
 
 export function pedido_sacola_para_maquina(pedido: ISacolaBrecho) {
@@ -23,5 +23,4 @@ export function pedido_sacola_para_maquina(pedido: ISacolaBrecho) {
         return new Error(`CodigoProduto não possui um valor válido`);
     };
 
-    
 };
