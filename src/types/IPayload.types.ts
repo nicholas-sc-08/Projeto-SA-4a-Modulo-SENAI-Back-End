@@ -3,19 +3,19 @@ import { IPedido, IPedidoUpdate } from "./IPedido.types";
 export interface IPayload {
 
     payload: {
-        orderId: string,
-        sku: string,
-        order: IPedido
+        orderId: string;
+        sku: string;
+        order: IPedido;
     };
-    callbackUrl: string
+    callbackUrl: string;
 };
 
 export interface IPayloadUpdate {
 
     payload: {
-        orderId: string,
-        sku: string,
-        order: IPedidoUpdate
+        orderId: string;
+        sku: string;
+        order: IPedidoUpdate;
     };
-    callbackUrl: string
+    callbackUrl: string;
 };

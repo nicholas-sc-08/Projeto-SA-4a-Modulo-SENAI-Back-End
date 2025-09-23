@@ -1,15 +1,16 @@
 import { IPayload, IPayloadUpdate } from "../../types/IPayload.types";
 import axios from "axios";
+import { pedido_sacola_para_maquina } from "../../utils/converter.utils";
 
-export async function buscar_pedidos(): Promise<IPayload[] | null>{
+export async function buscar_pedidos(): Promise<IPayload[] | null> {
 
     try {
 
         const resposta = await axios.get("http://52.1.197.112:3000/queue/items");
         return resposta.data
-        
+
     } catch (erro: any) {
-      
+
         console.error(erro);
         throw new Error(`Erro ao buscar os pedidos`);
     };
@@ -21,23 +22,33 @@ export async function buscar_pedido_pelo_id(id_payload: string): Promise<IPayloa
 
         const resposta = await axios.get(`http://52.1.197.112:3000/queue/items/${id_payload}`);
         return resposta.data;
-        
+
     } catch (erro: any) {
-      
+
         console.error(erro);
         throw new Error(`Erro ao buscar o produto pelo ID`);
     };
 };
 
-export async function enviar_pedido(payload: IPayload): Promise<IPayload | null>{
+export async function enviar_pedido(data: IPayload): Promise<IPayload | null> {
 
     try {
 
-        const resposta = await axios.post("http://52.1.197.112:3000/queue/items", payload);
+        // const payload_completo = {
+
+        //     payload: {
+
+        //         orderId: data.payload.orderId,
+        //         sku: data.payload.sku,
+        //         order: pedido_sacola_para_maquina();
+        //     },
+        //     callbackUrl: data.callbackUrl
+        // }
+        const resposta = await axios.post("http://52.1.197.112:3000/queue/items", data);
         return resposta.data;
 
     } catch (erro: any) {
-      
+
         console.error(erro);
         throw new Error(`Erro ao enviar pedido para a máquina.`);
     };
@@ -49,9 +60,9 @@ export async function atualizar_pedido(id_payload: string, payload: IPayloadUpda
 
         const resposta = await axios.put(`http://52.1.197.112:3000/queue/items/${id_payload}`, payload);
         return resposta.data;
-        
+
     } catch (erro: any) {
-      
+
         console.error(erro);
         throw new Error(`Erro ao atualizar o pedido`);
     };
@@ -62,9 +73,9 @@ export async function deletar_pedido(id_payload: string): Promise<void> {
     try {
 
         const pedido = await axios.delete(`http://52.1.197.112:3000/queue/items/${id_payload}`)
-                
+
     } catch (erro: any) {
-      
+
         console.error(erro);
         throw new Error(`Erro ao deletar o pedido`);
     };

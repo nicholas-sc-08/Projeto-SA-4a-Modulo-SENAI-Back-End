@@ -1,6 +1,9 @@
 import { sacola_brecho_schema, sacola_brecho_schema_update } from "../Services/Sacola_brecho/sacola_brecho.validation";
 import * as SacolaBrechoService from "../Services/Sacola_brecho/sacola_brecho.service";
 import { Request, Response } from "express";
+import { pedido_sacola_para_maquina } from "../utils/converter.utils";
+import { post_pedido } from "./pedido.controller";
+import { enviar_pedido } from "../Services/Pedido/pedido.services";
 
 export async function get_sacolas_brechos(req: Request, res: Response) {
 
@@ -49,13 +52,14 @@ export async function post_sacola_brecho(req: Request, res: Response) {
 
         const data = req.body;
         const validar_sacola_brecho = sacola_brecho_schema.parse(data);
-
+        
         if(!validar_sacola_brecho) {
-
+            
             res.status(401).json({message: `Sacola brechó não está valida para cadastro`});
         } else {
-
+            
             const sacola_brecho = await SacolaBrechoService.cadastrar_sacola_brecho(data);
+            pedido_sacola_para_maquina(data);
             res.status(201).json(sacola_brecho);
         };
         

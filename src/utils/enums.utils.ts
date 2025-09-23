@@ -5,6 +5,37 @@ export enum tipo_do_pedido_brecho {
     Ecobag = "ecobag"
 };
 
+export enum materiais {
+
+    papelao_reciclavel = "papelao_reciclavel",
+    plastico_biodegradavel = "plastico_biodegradavel",
+    papel_kraft = "papel_kraft",
+    algodao = "algodao",
+    poliester_reciclavel = "poliester_reciclavel"
+};
+
+export enum logos {
+
+    logo_fly = "logo_fly",
+    logo_fly_nome = "logo_fly_nome",
+    logo_fly_embaixo = "logo_fly_embaixo",
+    sem_logo = "sem_logo"
+};
+
+export enum tamanhos {
+
+    pequeno = "pequeno",
+    medio = "medio",
+    grande = "grande"
+};
+
+export enum cores {
+
+    verde = "verde",
+    branco = "branco",
+    
+};
+
 export enum andares_pedido {
 
     um_andar = 1,
