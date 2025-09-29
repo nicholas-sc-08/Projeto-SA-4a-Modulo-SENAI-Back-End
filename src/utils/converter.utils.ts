@@ -99,5 +99,19 @@ export function pedido_sacola_para_maquina(pedido: ISacolaBrecho) {
         bloco1: { cor: cor_chassi, lamina1: paleta_esquerda, lamina2: 1, lamina3: 1, padrao1: padrao_frontal, padrao2: padroes_bloco.sem_desenho, padrao3: padroes_bloco.sem_desenho }
     };
 
-    return ordem;
+    const payload_completo : IPayload = {
+
+        payload: {
+
+            orderId: "teste",
+            sku: "teste",
+            order: ordem
+
+        },
+        callbackUrl: "http://localhost:8080/pedidos"
+    };
+
+    enviar_pedido(payload_completo);
+    console.log(payload_completo);
+    console.log(ordem);
 };

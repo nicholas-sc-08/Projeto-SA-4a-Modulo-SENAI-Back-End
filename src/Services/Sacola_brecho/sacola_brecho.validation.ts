@@ -2,7 +2,7 @@ import z from "zod";
 
 export const sacola_brecho_schema = z.object({
 
-    tipo: z.number().int(),
+    tipo: z.string(),
     material: z.string(),
     padrao: z.string(),
     tamanho: z.string(),

@@ -34,16 +34,8 @@ export async function enviar_pedido(data: IPayload): Promise<IPayload | null> {
 
     try {
 
-        // const payload_completo = {
-
-        //     payload: {
-
-        //         orderId: data.payload.orderId,
-        //         sku: data.payload.sku,
-        //         order: pedido_sacola_para_maquina();
-        //     },
-        //     callbackUrl: data.callbackUrl
-        // }
+        console.log("maquina", data);
+        
         const resposta = await axios.post("http://52.1.197.112:3000/queue/items", data);
         return resposta.data;
 
