@@ -63,7 +63,7 @@ export async function post_pedido(req: Request, res: Response) {
             res.status(401).json({ message: `Pedido não está válido para cadastrar` });
         } else {
 
-            const pedido_enviado = await ServicePedido.enviar_pedido(validar_pedido);
+            const pedido_enviado = await ServicePedido.enviar_pedido(payload_completo);
             res.status(201).json(pedido_enviado);
         };
 

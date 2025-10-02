@@ -1,6 +1,7 @@
 import { Types } from "mongoose";
 import { ICor } from "./Icor.types";
 import { IPhoto } from "./Iphotos.types";
+import { tipo_do_pedido_brecho } from "../utils/enums.utils";
 
 export interface ISacola {
 
@@ -24,6 +25,7 @@ export interface ISacola {
 export interface ISacolaBrecho {
 
     _id?: Types.ObjectId;
+    tipo: tipo_do_pedido_brecho,
     material: string;
     padrao: string;
     tamanho: string;
@@ -36,6 +38,7 @@ export interface ISacolaBrecho {
 
 export interface ICreateSacolaBrecho {
 
+    tipo: tipo_do_pedido_brecho,
     material: string;
     padrao: string;
     tamanho: string;
@@ -48,6 +51,7 @@ export interface ICreateSacolaBrecho {
 
 export interface IUpdateSacolaBrecho {
 
+    tipo?: tipo_do_pedido_brecho,
     material?: string;
     padrao?: string;
     tamanho?: string;

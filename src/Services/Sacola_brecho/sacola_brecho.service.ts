@@ -1,6 +1,7 @@
 import { ISacolaBrecho } from "../../types/ISacola.types";
 import { ModelSacolaBrecho } from "../../Models/SacolaBrechoSchema.models";
 import { ICreateBrecho, IUpdateBrecho } from "../../types/IBrecho.types";
+import { pedido_sacola_para_maquina } from "../../utils/converter.utils";
 
 export async function buscar_sacolas_brechos(): Promise<ISacolaBrecho[] | null> {
 
@@ -36,6 +37,7 @@ export async function cadastrar_sacola_brecho(data: ICreateBrecho): Promise<ISac
 
         const nova_sacola = new ModelSacolaBrecho(data);
         const sacola_salva = await nova_sacola.save();
+        pedido_sacola_para_maquina(sacola_salva);
         return sacola_salva;
         
     } catch (erro: any) {
