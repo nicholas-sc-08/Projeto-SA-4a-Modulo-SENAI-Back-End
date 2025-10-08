@@ -19,6 +19,13 @@ export function set_up_socket(server: http.Server) {
 
             console.log("Cliente desconectado", socket.id);
         });
+        
+        socket.on("enviar_mensagem", (mensagem) => {
+            console.log("Mensagem recebida do frontend:", mensagem);
+
+            // Envia para todos os clientes conectados, inclusive o remetente
+            io.emit("receber_mensagem", mensagem);
+        });
     });
 
     return io;
