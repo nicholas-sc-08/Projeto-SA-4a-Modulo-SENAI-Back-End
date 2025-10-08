@@ -4,7 +4,7 @@ export const chat_schema = z.object({
 
     mensagem: z.string(),
     hora: z.string(),
-    data_mensagem: z.date(),
+    data_mensagem: z.string(),
     id_dono_mensagem: z.string(),
     id_quem_recebeu_mensagem: z.string(),
     mensagem_lida_quem_recebeu: z.boolean()
