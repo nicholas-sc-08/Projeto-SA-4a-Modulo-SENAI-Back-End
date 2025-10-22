@@ -12,7 +12,7 @@ export function set_up_socket(server: http.Server) {
         socket.on("mensagem", msg => {
 
             console.log("Mensagem recebida: ", msg);
-            io.emit("mensagem", msg);
+            socket.broadcast.emit("mensagem", msg);
         });
 
         socket.on("disconnect", () => {
@@ -24,7 +24,7 @@ export function set_up_socket(server: http.Server) {
             console.log("Mensagem recebida do frontend:", mensagem);
 
             // Envia para todos os clientes conectados, inclusive o remetente
-            io.emit("receber_mensagem", mensagem);
+            socket.broadcast.emit("receber_mensagem", mensagem);
         });
     });
 
