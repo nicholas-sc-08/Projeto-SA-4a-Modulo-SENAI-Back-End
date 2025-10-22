@@ -23,7 +23,8 @@ export function set_up_socket(server: http.Server) {
         socket.on("enviar_mensagem", (mensagem) => {
             console.log("Mensagem recebida do frontend:", mensagem);
 
-            // Envia para todos os clientes conectados, inclusive o remetente
+            // Isto envia a mensagem para TODOS OS OUTROS CLIENTES CONECTADOS (o destinatário), 
+            // EXCETO o cliente que enviou (o remetente), que já atualizou sua tela no frontend.
             socket.broadcast.emit("receber_mensagem", mensagem);
         });
     });
