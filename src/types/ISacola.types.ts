@@ -9,8 +9,8 @@ export interface ISacola {
     nome: string;
     preco: number;
     condicao: string;
-    imagem: IPhoto[];
-    cor: ICor[];
+    imagem: string[];
+    cor: string[];
     marca?: string;
     fk_id_categoria: string;
     quantidade: number;

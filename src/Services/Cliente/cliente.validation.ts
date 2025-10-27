@@ -10,7 +10,7 @@ export const cliente_schema = z.object({
     senha: z.string(),
     telefone: z.string(),
     cpf: z.string(),
-    data_de_nascimento: z.date(),
+    data_de_nascimento: z.string(),
     imagem_de_perfil: z.string(),
     conversas: z.array(conversas_schema).optional(),
     buscas_recentes: z.array(buscas_recentes_schema).optional(),
