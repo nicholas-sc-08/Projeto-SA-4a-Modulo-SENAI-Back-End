@@ -1,4 +1,5 @@
 import { enviar_pedido } from "../Services/Pedido/pedido.services";
+import { buscar_sacolas_brechos } from "../Services/Sacola_brecho/sacola_brecho.service";
 import { IPayload } from "../types/IPayload.types";
 import { IPedido } from "../types/IPedido.types";
 import { ISacolaBrecho } from "../types/ISacola.types";
@@ -28,12 +29,13 @@ export function pedido_sacola_para_maquina(pedido: ISacolaBrecho) {
         andar_pedido = andares_pedido.tres_andares;
     } else {
 
-        return new Error(`CodigoProduto não possui um valor válido`);
+        throw new Error(`CodigoProduto não possui um valor válido`);
     };
 
     if (sacola_brecho.material === materiais.papelao_reciclavel) {
 
         cor_chassi = cor_bloco.vermelho;
+
     } else if (sacola_brecho.material === materiais.plastico_biodegradavel) {
 
         cor_chassi = cor_bloco.preto;
@@ -48,7 +50,7 @@ export function pedido_sacola_para_maquina(pedido: ISacolaBrecho) {
         cor_chassi = cor_bloco.vermelho;
     } else {
 
-        return new Error(`Cor do chassi não possui um valor válido`);
+        throw new Error(`Cor do chassi não possui um valor válido`);
     };
 
     if (sacola_brecho.padrao === logos.logo_fly) {
@@ -65,7 +67,7 @@ export function pedido_sacola_para_maquina(pedido: ISacolaBrecho) {
         paleta_esquerda = cor_laminas_bloco.sem_cor;
     } else {
 
-        return new Error(`Cor da lâmina esquerda não condiz com uma das opções`);
+        throw new Error(`Cor da lâmina esquerda não condiz com uma das opções`);
     };
 
     if (sacola_brecho.tamanho === tamanhos.pequeno) {
@@ -79,32 +81,35 @@ export function pedido_sacola_para_maquina(pedido: ISacolaBrecho) {
         padrao_frontal = padroes_bloco.estrela;
     } else {
 
-        return new Error(`Tamanho de produto não condiz com uma das opções`);
+        throw new Error(`Tamanho de produto não condiz com uma das opções`);
     };
 
-    if (sacola_brecho.cor === cores.verde) {
+    if (sacola_brecho.tipo != tipo_do_pedido_brecho.Caixa) {
 
-        paleta_direita = cor_laminas_bloco.verde;
-    } else if (sacola_brecho.cor === cores.branco) {
+        if (sacola_brecho.cor === cores.verde) {
 
-        paleta_direita = cor_laminas_bloco.branco;
-    } else {
+            paleta_direita = cor_laminas_bloco.verde;
+        } else if (sacola_brecho.cor === cores.branco) {
 
-        return new Error(`Cor da lâmina direita segundo andar não condiz com uma das opções`);
+            paleta_direita = cor_laminas_bloco.branco;
+        } else {
+
+            throw new Error(`Cor da lâmina direita segundo andar não condiz com uma das opções`);
+        };
     };
 
     const ordem: IPedido = {
 
         codigoProduto: andar_pedido,
         bloco1: { cor: cor_chassi, lamina1: paleta_esquerda, lamina2: 1, lamina3: 1, padrao1: padrao_frontal, padrao2: padroes_bloco.sem_desenho, padrao3: padroes_bloco.sem_desenho }
-    };
+    };   
 
-    const payload_completo : IPayload = {
+    const payload_completo: IPayload = {
 
         payload: {
 
-            orderId: "teste",
-            sku: "teste",
+            orderId: "FLY-01",
+            sku: "KIT-01",
             order: ordem
 
         },
@@ -112,6 +117,5 @@ export function pedido_sacola_para_maquina(pedido: ISacolaBrecho) {
     };
 
     enviar_pedido(payload_completo);
-    console.log(payload_completo);
-    console.log(ordem);
+    console.log(enviar_pedido(payload_completo));
 };
