@@ -1,4 +1,4 @@
-import { ISacolaBrecho } from "../../types/ISacola.types";
+import { ICreateSacolaBrecho, ISacolaBrecho } from "../../types/ISacola.types";
 import { ModelSacolaBrecho } from "../../Models/SacolaBrechoSchema.models";
 import { ICreateBrecho, IUpdateBrecho } from "../../types/IBrecho.types";
 import { pedido_sacola_para_maquina } from "../../utils/converter.utils";
@@ -31,7 +31,7 @@ export async function buscar_sacola_brecho_id(id: string): Promise<ISacolaBrecho
     };
 };
 
-export async function cadastrar_sacola_brecho(data: ICreateBrecho): Promise<ISacolaBrecho | null> {
+export async function cadastrar_sacola_brecho(data: ICreateSacolaBrecho): Promise<ISacolaBrecho | null> {
 
     try {
 
