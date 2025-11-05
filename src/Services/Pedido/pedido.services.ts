@@ -36,7 +36,7 @@ export async function enviar_pedido(data: IPayload): Promise<IPayload | null> {
 
         console.log("maquina", data);
         
-        const resposta = await axios.post("http://52.1.197.112:3000/queue/items", data);
+        const resposta = await axios.post("t", data);
         return resposta.data;
 
     } catch (erro: any) {

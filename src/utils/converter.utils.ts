@@ -71,6 +71,8 @@ export function pedido_sacola_para_maquina(pedido: ISacolaBrecho) {
     if (sacola_brecho.tamanho === tamanhos.pequeno) {
 
         padrao_frontal = padroes_bloco.casa;
+        console.log(true);
+        
     } else if (sacola_brecho.tamanho === tamanhos.medio) {
 
         padrao_frontal = padroes_bloco.barco;
@@ -111,7 +113,7 @@ export function pedido_sacola_para_maquina(pedido: ISacolaBrecho) {
         callbackUrl: "http://localhost:8080/pedidos"
     };
 
-    enviar_pedido(payload_completo);
     console.log(payload_completo);
     console.log(ordem);
+    enviar_pedido(payload_completo);
 };
