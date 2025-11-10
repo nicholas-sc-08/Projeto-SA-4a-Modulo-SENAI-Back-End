@@ -178,7 +178,7 @@ export async function pedido_sacola_para_maquina(pedido: ISacolaBrecho) {
 
         payload: {
 
-            orderId: "FLY-01",
+            orderId: `FLY-${Date.now()}`,
             sku: `KIT-${sacola_brecho.tipo}`,
             order: ordem
 
@@ -189,7 +189,7 @@ export async function pedido_sacola_para_maquina(pedido: ISacolaBrecho) {
     try {
 
         const resposta = await enviar_pedido(payload_completo);
-        console.log(enviar_pedido(payload_completo));
+        console.log(resposta);
 
     } catch (erro: any) {
 
