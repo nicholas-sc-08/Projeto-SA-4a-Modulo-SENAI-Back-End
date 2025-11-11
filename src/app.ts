@@ -9,11 +9,13 @@ import router_marca from "./Routes/router.marca";
 import router_upload from "./Routes/router.upload";
 import router_pedido from "./Routes/router.pedido";
 import router_sacola_brecho from "./Routes/router.sacola_brecho";
+import router_endereco from "./Routes/router.endereco";
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use(`/enderecos`, router_endereco);
 app.use(`/api`, router_upload);
 app.use(`/pedidos`, router_pedido);
 app.use(`/sacolas_brechos`, router_sacola_brecho);
