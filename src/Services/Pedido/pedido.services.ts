@@ -76,7 +76,7 @@
 import { IPayload, IPayloadUpdate } from "../../types/IPayload.types";
 import axios from "axios";
 
-const MAQUINA_URL = "http://52.1.197.112:3000";
+const MAQUINA_URL = "http://52.72.137.244:3000";
 
 export async function buscar_pedidos(): Promise<IPayload[] | null> {
     try {
