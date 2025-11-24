@@ -1,7 +1,6 @@
 import { IBuscasRecentes } from "./IBuscasRecentes.types";
 import { IConversas } from "./IConversas.types";
 import { Types } from "mongoose";
-import { IPayload } from "./IPayload.types";
 
 export interface IBrecho {
 

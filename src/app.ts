@@ -10,6 +10,7 @@ import router_upload from "./Routes/router.upload";
 import router_pedido from "./Routes/router.pedido";
 import router_sacola_brecho from "./Routes/router.sacola_brecho";
 import router_endereco from "./Routes/router.endereco";
+import router_estoque from "./Routes/router.estoque";
 
 const app = express();
 
@@ -25,5 +26,6 @@ app.use(`/categorias`, router_categoria);
 app.use(`/brechos`, router_brecho);
 app.use(`/chats`, router_chat);
 app.use(`/marcas`, router_marca);
+app.use("/estoques", router_estoque);
 
 export default app;
