@@ -5,7 +5,7 @@ import { buscas_recentes_schema } from "../buscas_recentes.validation";
 export const brecho_schema = z.object({
 
     nome_vendedor: z.string(),
-    data_de_nascimento_vendedor: z.date(),
+    data_de_nascimento_vendedor: z.coerce.date(), // atualização aqui
     nome_brecho: z.string(),
     email: z.string(),
     telefone: z.string(),
