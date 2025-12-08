@@ -33,6 +33,7 @@ export interface ISacolaBrecho {
     cor_alca?: string;
     cor?: string;
     valor: number;
+    quantidade: number;
     id_brecho: string;
 };
 
@@ -45,6 +46,7 @@ export interface ICreateSacolaBrecho {
     cor_corpo?: string;
     cor_alca?: string;
     cor?: string;
+    quantidade: number;
     valor: number;
     id_brecho: string;
 };
@@ -57,6 +59,7 @@ export interface IUpdateSacolaBrecho {
     tamanho?: string;
     cor_corpo?: string;
     cor_alca?: string;
+    quantidade?: number;
     cor?: string;
     valor?: number;
     id_brecho?: string;
