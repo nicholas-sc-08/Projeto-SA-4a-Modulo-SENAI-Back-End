@@ -30,13 +30,27 @@ export async function buscar_cliente_id(id_cliente: string): Promise<ICliente | 
     };
 };
 
+export async function buscar_cliente_email(email: string): Promise<ICliente | null> {
+
+    try {
+
+        const cliente = await ModelCliente.findOne({ email });
+        return cliente;
+
+    } catch (erro) {
+
+        console.error(erro);
+        throw new Error(`Falha ao buscar o Cliente pelo ID`);
+    };
+};
+
 export async function cadastrar_cliente(data_cliente: ICreateCliente): Promise<ICliente | null> {
 
     try {
 
 
-        const senha_criptografada : string = await bcrypt.hash(data_cliente.senha, 10);
-        const cpf_criptografado : string = await bcrypt.hash(data_cliente.cpf, 10);
+        const senha_criptografada: string = await bcrypt.hash(data_cliente.senha, 10);
+        const cpf_criptografado: string = await bcrypt.hash(data_cliente.cpf, 10);
 
         data_cliente.senha = senha_criptografada;
         data_cliente.cpf = cpf_criptografado
@@ -71,9 +85,9 @@ export async function deletar_cliente(id_cliente: string): Promise<void> {
     try {
 
         const cliente = await ModelCliente.findByIdAndDelete(id_cliente);
-        
+
     } catch (erro) {
-      
+
         console.error(erro);
         throw new Error(`Falha ao deletar o Cliente pelo ID`);
     };
