@@ -5,7 +5,7 @@ import { handleCreateCheckout, handleCreateCheckoutBrecho } from '../Controllers
 const router_stripe = Router();
 
 // Rota POST para iniciar o checkout
-router_stripe.post('/create-checkout-session', handleCreateCheckout);
+router_stripe.post('', handleCreateCheckout);
 router_stripe.post('/create-checkout-session-brecho', handleCreateCheckoutBrecho);
 
 export default router_stripe;

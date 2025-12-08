@@ -9,6 +9,7 @@ export const sacola_brecho_schema = z.object({
     cor_corpo: z.string().optional(),
     cor_alca: z.string().optional(),
     cor: z.string().optional(),
+    quantidade: z.number().positive(),
     valor: z.number().positive(),
     id_brecho: z.string()
 });
