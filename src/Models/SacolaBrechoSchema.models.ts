@@ -8,9 +8,9 @@ const sacola_brecho_schema = new Schema<ICreateSacolaBrecho>({
     material: { type: String, required: true },
     tamanho: { type: String, required: true },
     padrao: { type: String, required: true },
+    quantidade: { type: Number, required: true },
     cor_corpo: { type: String, required: false },
     cor_alca: { type: String, required: false },
-    cor: { type: String, required: false },
     valor: { type: Number, required: true },
     id_brecho: { type: String, required: true }
 });
