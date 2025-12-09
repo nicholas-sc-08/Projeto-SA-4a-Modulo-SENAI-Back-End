@@ -10,8 +10,8 @@ const router_brecho = Router();
 
 router_brecho.post(`/`, post_brecho);
 router_brecho.get(`/`, get_brechos);
-router_brecho.get(`/:id`, get_brecho);
 router_brecho.use(autenticar_token);
+router_brecho.get(`/:id`, get_brecho);
 router_brecho.put(`/:id`, put_brecho);
 router_brecho.delete(`/:id`, delete_brecho);
 

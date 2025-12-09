@@ -1,7 +1,9 @@
 import type { Request, Response, NextFunction } from "express";
 import type { ILogado } from "../types/ILogado.types";
 import jwt from "jsonwebtoken";
+import { configDotenv } from "dotenv";
 
+configDotenv();
 declare global {
 
     namespace Express {
@@ -27,7 +29,7 @@ export function autenticar_token(req: Request, res: Response, next: NextFunction
 
         if(error){
 
-            return res.status(403).json({message: "Forbidden"});
+            return res.status(403).json({message: error.message});
         };
 
         req.user = user as ILogado;
