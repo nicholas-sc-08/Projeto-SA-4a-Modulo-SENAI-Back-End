@@ -23,7 +23,7 @@ export async function buscar_pedido_pelo_id(id_payload: string): Promise<IPayloa
     }
 }
 
-export async function enviar_pedido(data: any): Promise<IPayload | null> {
+export async function enviar_pedido(data: any): Promise<IPayload> {
     try {
         console.log("Enviando para máquina:", data);
 

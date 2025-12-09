@@ -12,7 +12,8 @@ const sacola_brecho_schema = new Schema<ICreateSacolaBrecho>({
     cor_corpo: { type: String, required: false },
     cor_alca: { type: String, required: false },
     valor: { type: Number, required: true },
-    id_brecho: { type: String, required: true }
+    id_brecho: { type: String, required: true },
+    id_pedido: { type: String, required: false }
 });
 
 export const ModelSacolaBrecho = model<ICreateSacolaBrecho>(`sacolas_brechos`, sacola_brecho_schema);
