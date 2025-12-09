@@ -38,7 +38,6 @@ export async function cadastrar_sacola_brecho(data: ICreateSacolaBrecho): Promis
         const pedido_completo = await pedido_sacola_para_maquina(data);
         const nova_sacola = new ModelSacolaBrecho(pedido_completo);
         const sacola_salva = await nova_sacola.save();
-        console.log(pedido_sacola_para_maquina(sacola_salva));
 
         return sacola_salva;
 

@@ -185,7 +185,7 @@ export async function pedido_sacola_para_maquina(pedido: ISacolaBrecho) {
 
         console.log("Enviando pedido para máquina:", payload_para_envio);
 
-        const resposta = await enviar_pedido(payload_para_envio).then(pedido => pedido_completo = { ...sacola_brecho, id_pedido: pedido._id });
+        const resposta = await enviar_pedido(payload_para_envio).then(pedido => pedido_completo = { ...sacola_brecho, id_pedido: pedido.id });
 
         console.log("Pedido enviado com sucesso:", resposta);
         return pedido_completo;

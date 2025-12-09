@@ -35,8 +35,6 @@ export async function enviar_pedido(data: any): Promise<IPayload> {
         };
 
         const resposta = await axios.post(`${MAQUINA_URL}/queue/items`, payload_completo);
-
-        console.log("Resposta da máquina:", resposta.data);
         return resposta.data;
     } catch (erro: any) {
         console.error("Erro ao enviar pedido:", erro);

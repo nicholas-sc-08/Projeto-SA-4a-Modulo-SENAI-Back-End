@@ -2,7 +2,7 @@ import { IPedido, IPedidoUpdate } from "./IPedido.types";
 
 export interface IPayload {
 
-    _id?: string;
+    id?: string;
     payload: {
         orderId: string;
         sku: string;
