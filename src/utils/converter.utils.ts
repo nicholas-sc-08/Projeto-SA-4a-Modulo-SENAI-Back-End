@@ -1,5 +1,5 @@
 import { enviar_pedido } from "../Services/Pedido/pedido.services";
-import { ISacolaBrecho } from "../types/ISacola.types";
+import { ICreateSacolaBrecho, ISacolaBrecho } from "../types/ISacola.types";
 import { IPedido } from "../types/IPedido.types";
 import {
     cor_bloco,
@@ -16,6 +16,16 @@ import {
 export async function pedido_sacola_para_maquina(pedido: ISacolaBrecho) {
 
     const sacola_brecho: ISacolaBrecho = pedido;
+    let pedido_completo: ICreateSacolaBrecho = {
+        tipo: tipo_do_pedido_brecho.Caixa,
+        material: "",
+        padrao: "",
+        tamanho: "",
+        quantidade: 0,
+        valor: 0,
+        id_brecho: "",
+        id_pedido: undefined
+    };
     let andar_pedido: andares_pedido;
     let cor_chassi: cor_bloco;
     let paleta_frontal: cor_laminas_bloco = cor_laminas_bloco.sem_cor;
@@ -172,12 +182,13 @@ export async function pedido_sacola_para_maquina(pedido: ISacolaBrecho) {
     };
 
     try {
+
         console.log("Enviando pedido para máquina:", payload_para_envio);
 
-        const resposta = await enviar_pedido(payload_para_envio);
+        const resposta = await enviar_pedido(payload_para_envio).then(pedido => pedido_completo = { ...sacola_brecho, id_pedido: pedido.id });
 
         console.log("Pedido enviado com sucesso:", resposta);
-        return resposta;
+        return pedido_completo;
 
     } catch (erro: any) {
         console.error("Erro ao enviar pedido:", erro);

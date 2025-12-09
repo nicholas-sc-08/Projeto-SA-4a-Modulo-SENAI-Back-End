@@ -1,8 +1,10 @@
 import { Router } from "express";
 import { delete_pedido, get_pedido, get_pedidos, post_pedido, put_pedido } from "../Controllers/pedido.controller";
+import { autenticar_token } from "../middlewares/auth.middleware";
 
 const router_pedido = Router();
 
+router_pedido.use(autenticar_token);
 router_pedido.get(`/`, get_pedidos);
 router_pedido.get(`/:id`, get_pedido);
 router_pedido.post(`/`, post_pedido);

@@ -3,9 +3,11 @@ import { get_sacola_brecho, get_sacolas_brechos } from "../Controllers/sacola_br
 import { post_sacola_brecho } from "../Controllers/sacola_brecho.controller";
 import { put_sacola_brecho } from "../Controllers/sacola_brecho.controller";
 import { delete_sacola_brecho } from "../Controllers/sacola_brecho.controller";
+import { autenticar_token } from "../middlewares/auth.middleware";
 
 const router_sacola_brecho = Router();
 
+router_sacola_brecho.use(autenticar_token);
 router_sacola_brecho.get(`/`, get_sacolas_brechos);
 router_sacola_brecho.get(`/:id`, get_sacola_brecho);
 router_sacola_brecho.post(`/`, post_sacola_brecho);

@@ -59,7 +59,6 @@ export async function post_sacola_brecho(req: Request, res: Response) {
         } else {
             
             const sacola_brecho = await SacolaBrechoService.cadastrar_sacola_brecho(data);
-            pedido_sacola_para_maquina(data);
             res.status(201).json(sacola_brecho);
         };
         

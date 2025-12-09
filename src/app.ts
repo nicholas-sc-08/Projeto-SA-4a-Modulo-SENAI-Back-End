@@ -12,15 +12,19 @@ import router_sacola_brecho from "./Routes/router.sacola_brecho";
 import router_endereco from "./Routes/router.endereco";
 import router_estoque from "./Routes/router.estoque";
 import router_stripe from "./Routes/router.stripe";
+import router_gemini from "./Routes/router.gemini";
+import router_auth from "./Routes/router.auth";
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use("/auth", router_auth);
 app.use(`/api/payments`, router_stripe);
 app.use(`/enderecos`, router_endereco);
 app.use(`/api`, router_upload);
+app.use(`/gemini`, router_gemini);
 app.use(`/pedidos`, router_pedido);
 app.use(`/sacolas_brechos`, router_sacola_brecho);
 app.use(`/produtos`, router_produto);
