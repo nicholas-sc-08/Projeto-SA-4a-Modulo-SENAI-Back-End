@@ -1,8 +1,10 @@
-import { Request, Response } from "express";
+import { FastifyRequest, FastifyReply } from "fastify";
 import * as ServicoCliente from "../Services/Cliente/cliente.service";
 import { cliente_schema, cliente_update_schema } from "../Services/Cliente/cliente.validation";
+import { ICreateCliente, IUpdateCliente } from "../types/ICliente.types";
+import { GetId } from "../types/IFastify";
 
-export async function get_clientes(req: Request, res: Response) {
+export async function get_clientes(req: FastifyRequest, reply: FastifyReply) {
 
     try {
 
@@ -10,40 +12,40 @@ export async function get_clientes(req: Request, res: Response) {
 
         if (!clientes) {
 
-            return res.status(404).json({ message: `Clientes não Encontrado!` });
+            return reply.status(404).send({ message: `Clientes não Encontrado!` });
         } else {
 
-            return res.status(200).json(clientes);
+            return reply.status(200).send(clientes);
         };
 
     } catch (erro: any) {
 
-        return res.status(500).json({ message: erro.message });
+        return reply.status(500).send({ message: erro.message });
     };
 };
 
-export async function get_cliente_id(req: Request, res: Response) {
+export async function get_cliente_id(req: FastifyRequest<{ Params: GetId }>, reply: FastifyReply) {
 
     try {
 
         const { id } = req.params;
-        const cliente = await ServicoCliente.buscar_cliente_id(id);
+        const cliente = await ServicoCliente.buscar_cliente_id(String(id));
 
         if (!cliente) {
 
-            return res.status(404).json({ message: `Cliente não encontrado` });
+            return reply.status(404).send({ message: `Cliente não encontrado` });
         } else {
 
-            return res.status(200).json(cliente);
+            return reply.status(200).send(cliente);
         };
 
     } catch (erro: any) {
 
-        return res.status(500).json({ message: erro.message });
+        return reply.status(500).send({ message: erro.message });
     };
 };
 
-export async function post_cliente(req: Request, res: Response) {
+export async function post_cliente(req: FastifyRequest<{ Body: ICreateCliente }>, reply: FastifyReply) {
 
     try {
 
@@ -51,47 +53,47 @@ export async function post_cliente(req: Request, res: Response) {
 
         const cliente = cliente_schema.parse(req.body);
         const novo_cliente = await ServicoCliente.cadastrar_cliente(cliente);
-        res.status(201).json(novo_cliente);
+        reply.status(201).send(novo_cliente);
 
     } catch (erro: any) {
 
-        return res.status(500).json({ message: erro.message });
+        return reply.status(500).send({ message: erro.message });
     };
 };
 
-export async function put_cliente(req: Request, res: Response) {
+export async function put_cliente(req: FastifyRequest<{ Params: GetId, Body: IUpdateCliente }>, reply: FastifyReply) {
 
     try {
 
         const { id } = req.params;
         const cliente = cliente_update_schema.parse(req.body);
-        const cliente_atualizado = await ServicoCliente.atualizar_cliente(id, cliente);
+        const cliente_atualizado = await ServicoCliente.atualizar_cliente(String(id), cliente);
 
         if (!cliente_atualizado) {
 
-            return res.status(404).json({ message: `Cliente não encontrado` });
+            return reply.status(404).send({ message: `Cliente não encontrado` });
 
         } else {
 
-            return res.status(200).json(cliente_atualizado);
+            return reply.status(200).send(cliente_atualizado);
         };
 
     } catch (erro: any) {
 
-        return res.status(500).json({ message: erro.message });
+        return reply.status(500).send({ message: erro.message });
     };
 };
 
-export async function delete_cliente(req: Request, res: Response) {
+export async function delete_cliente(req: FastifyRequest<{ Params: GetId }>, reply: FastifyReply) {
 
     try {
 
         const { id } = req.params;
-        const cliente_deletado = await ServicoCliente.deletar_cliente(id);
-        return res.status(200).json({ message: `Cliente deletado com sucesso!` });
+        await ServicoCliente.deletar_cliente(String(id));
+        return reply.status(200).send({ message: `Cliente deletado com sucesso!` });
 
     } catch (erro: any) {
 
-        return res.status(500).json({ meesage: erro.message });
+        return reply.status(500).send({ meesage: erro.message });
     };
 };

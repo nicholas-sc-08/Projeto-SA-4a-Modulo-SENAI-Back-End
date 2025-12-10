@@ -3,6 +3,7 @@ import { pedido_schema } from "./pedido.validation";
 
 export const pedido_completo_schema = z.object({
 
+    _id: z.string().optional(),
     payload: z.object({
 
         orderId: z.string(),

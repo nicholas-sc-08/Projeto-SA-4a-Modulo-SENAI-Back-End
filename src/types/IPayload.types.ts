@@ -1,4 +1,5 @@
 import { IPedido, IPedidoUpdate } from "./IPedido.types";
+import { ISacola, ISacolaBrecho, } from "./ISacola.types";
 
 export interface IPayload {
 
@@ -20,4 +21,16 @@ export interface IPayloadUpdate {
         order: IPedidoUpdate;
     };
     callbackUrl: string;
+};
+
+export interface CheckoutBodyClient {
+  items: ISacola[] ;
+  amount: number;
+  productId: string;
+};
+
+export interface CheckoutBodyBrecho {
+  items: ISacolaBrecho[] ;
+  amount: number;
+  productId: string;
 };

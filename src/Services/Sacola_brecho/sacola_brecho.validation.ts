@@ -11,7 +11,8 @@ export const sacola_brecho_schema = z.object({
     cor: z.string().optional(),
     quantidade: z.number().positive(),
     valor: z.number().positive(),
-    id_brecho: z.string()
+    id_brecho: z.string(),
+    id_pedido: z.string()
 });
 
 export const sacola_brecho_schema_update = sacola_brecho_schema.partial();

@@ -1,9 +1,10 @@
-import { Request, Response } from "express";
+import { FastifyRequest, FastifyReply } from "fastify";
 import { brecho_schema, brecho_update_schema } from "../Services/Brecho/brecho.validation";
 import bcrypt from "bcrypt";
 import * as brechosService from "../Services/Brecho/brecho.service";
+import { GetId } from "../types/IFastify";
 
-export async function get_brechos(req: Request, res: Response) {
+export async function get_brechos(req: FastifyRequest, reply: FastifyReply) {
 
     try {
 
@@ -11,62 +12,62 @@ export async function get_brechos(req: Request, res: Response) {
 
         if (!brechos) {
 
-            res.status(404).json({ message: `Brechós não encontrados!` });
+            reply.status(404).send({ message: `Brechós não encontrados!` });
         } else {
 
-            res.status(200).json(brechos);
+            reply.status(200).send(brechos);
         };
 
     } catch (erro: any) {
 
-        res.status(500).json({ message: erro.message });
+        reply.status(500).send({ message: erro.message });
     };
 };
 
-export async function get_brecho(req: Request, res: Response) {
+export async function get_brecho(req: FastifyRequest<{ Params: GetId }>, reply: FastifyReply) {
 
     try {
 
         const { id } = req.params;
-        const brecho = await brechosService.buscar_brecho_id(id);
+        const brecho = await brechosService.buscar_brecho_id(String(id));
 
         if (!brecho) {
 
-            res.status(404).json({ message: `Brechó não encontrado!` });
+            reply.status(404).send({ message: `Brechó não encontrado!` });
         } else {
 
-            res.status(200).json(brecho);
+            reply.status(200).send(brecho);
         };
 
     } catch (erro: any) {
 
-        res.status(500).json({ message: erro.message });
+        reply.status(500).send({ message: erro.message });
     };
 };
 
-export async function post_brecho(req: Request, res: Response) {
+export async function post_brecho(req: FastifyRequest, reply: FastifyReply) {
 
     try {
 
         const data = req.body;
         const brecho_valido = brecho_schema.parse(data);
-        
-        if(!brecho_valido) {
-            
-            res.status(401).json({message: `Brechó não está válido para cadastro!`});
+
+        if (!brecho_valido) {
+
+            reply.status(401).send({ message: `Brechó não está válido para cadastro!` });
         } else {
-            
-            const brecho_cadastrado = await brechosService.cadastrar_brecho(data);
-            res.status(201).json(brecho_cadastrado);
+
+            const brecho_cadastrado = await brechosService.cadastrar_brecho(brecho_valido);
+            reply.status(201).send(brecho_cadastrado);
         };
-        
+
     } catch (erro: any) {
-      
-        res.status(500).json({message: erro.message});
+
+        reply.status(500).send({ message: erro.message });
     };
 };
 
-export async function put_brecho(req: Request, res: Response) {
+export async function put_brecho(req: FastifyRequest<{ Params: GetId }>, reply: FastifyReply) {
 
     try {
 
@@ -74,31 +75,31 @@ export async function put_brecho(req: Request, res: Response) {
         const data = req.body;
         const brecho_valido = brecho_update_schema.parse(data);
 
-        if(!brecho_valido) {
+        if (!brecho_valido) {
 
-            res.status(401).json({message: `Formato do brechó não está válido para atualizar!`});
+            reply.status(401).send({ message: `Formato do brechó não está válido para atualizar!` });
         } else {
 
-            const brecho_atualizado = await brechosService.atualizar_brecho(id, brecho_valido);
-            res.status(200).json(brecho_atualizado);
+            const brecho_atualizado = await brechosService.atualizar_brecho(String(id), brecho_valido);
+            reply.status(200).send(brecho_atualizado);
         };
-        
+
     } catch (erro: any) {
-      
-        res.status(500).json({message: erro.message});
+
+        reply.status(500).send({ message: erro.message });
     };
 };
 
-export async function delete_brecho(req: Request, res: Response) {
+export async function delete_brecho(req: FastifyRequest<{ Params: GetId }>, reply: FastifyReply) {
 
     try {
 
         const { id } = req.params;
-        const brecho_deletado = await brechosService.deletar_brecho(id);
-        res.status(200).json({message: `Brechó deletado com sucesso!`});
-        
+        await brechosService.deletar_brecho(String(id));
+        reply.status(200).send({ message: `Brechó deletado com sucesso!` });
+
     } catch (erro: any) {
-      
-        res.status(500).json({message: erro.message});
+
+        reply.status(500).send({ message: erro.message });
     };
 };

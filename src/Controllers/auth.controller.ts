@@ -1,7 +1,8 @@
+import { FastifyReply, FastifyRequest } from "fastify";
 import { autenticar } from "../Services/Auth/auth.service";
-import { Request, Response } from "express";
+import { ILogado } from "../types/ILogado.types";
 
-export async function login(req: Request, res: Response): Promise<Response> {
+export async function login(req: FastifyRequest<{ Body: ILogado }>, reply: FastifyReply): Promise<FastifyReply> {
 
     try {
 
@@ -10,13 +11,13 @@ export async function login(req: Request, res: Response): Promise<Response> {
 
         if (!token) {
 
-            return res.status(401).json({ message: "Credenciais inválidas" });
+            return reply.status(401).send({ message: "Credenciais inválidas" });
         };
 
-        return res.status(200).json(token);
+        return reply.status(200).send(token);
 
     } catch (erro: any) {
 
-        return res.status(500).json({ error: erro.message });
+        return reply.status(500).send({ error: erro.message });
     };
 };

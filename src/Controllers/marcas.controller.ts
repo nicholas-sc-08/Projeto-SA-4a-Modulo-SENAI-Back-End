@@ -1,68 +1,69 @@
-import { Request, Response } from "express";
+import { FastifyRequest, FastifyReply } from "fastify";
 import { marca_schema, marca_update_schema } from "../Services/Marca/marca.validation";
 import * as marcasServices from "../Services/Marca/marca.service"
+import { GetId } from "../types/IFastify";
 
-export async function get_marcas(req: Request, res: Response) {
+export async function get_marcas(req: FastifyRequest, reply: FastifyReply) {
 
     try {
 
         const marcas = await marcasServices.buscar_marcas();
 
-        if(!marcas) {
+        if (!marcas) {
 
-            res.status(404).json({message: `marcas não foram encontrados!`});
+            reply.status(404).send({ message: `marcas não foram encontrados!` });
         } else {
 
-            res.status(200).json(marcas);
+            reply.status(200).send(marcas);
         };
-        
+
     } catch (erro: any) {
-      
-        res.status(500).json({message: erro.message});
+
+        reply.status(500).send({ message: erro.message });
     };
 };
 
-export async function get_marca(req: Request, res: Response) {
+export async function get_marca(req: FastifyRequest<{ Params: GetId }>, reply: FastifyReply) {
 
     try {
 
         const { id } = req.params;
-        const marca = await marcasServices.buscar_marca_id(id);
+        const marca = await marcasServices.buscar_marca_id(String(id));
 
-        if(!marca) {
+        if (!marca) {
 
-            res.status(200).json(marca);
+            reply.status(200).send(marca);
         };
-        
+
     } catch (erro: any) {
-      
-        res.status(500).json({message: erro.message});
+
+        reply.status(500).send({ message: erro.message });
     };
 };
 
-export async function post_marca(req: Request, res: Response) {
+export async function post_marca(req: FastifyRequest, reply: FastifyReply) {
 
     try {
 
         const data = req.body;
         const marca_valida = marca_schema.parse(data);
 
-        if(!marca_valida){
+        if (!marca_valida) {
 
-            res.status(401).json({message: `Marca não está válido para cadastro!`});
+            reply.status(401).send({ message: `Marca não está válido para cadastro!` });
         } else {
 
             const marca_criada = await marcasServices.cadastrar_marca(marca_valida);
-            res.status(201).json(marca_criada);
+            reply.status(201).send(marca_criada);
         };
-        
+
     } catch (erro: any) {
-      
-        res.status(500).json({message: erro.message});        
+
+        reply.status(500).send({ message: erro.message });
     };
 };
 
-export async function put_marca(req: Request, res: Response) {
+export async function put_marca(req: FastifyRequest<{ Params: GetId }>, reply: FastifyReply) {
 
     try {
 
@@ -70,31 +71,31 @@ export async function put_marca(req: Request, res: Response) {
         const data = req.body;
         const marca_valida = marca_update_schema.parse(data);
 
-        if(!marca_valida) {
+        if (!marca_valida) {
 
-            res.status(401).json({message: `Formato inválido para atualizar!`});
+            reply.status(401).send({ message: `Formato inválido para atualizar!` });
         } else {
 
-            const marca_atualizada = await marcasServices.atualizar_marca(id, marca_valida);
-            res.status(200).json(marca_atualizada);
+            const marca_atualizada = await marcasServices.atualizar_marca(String(id), marca_valida);
+            reply.status(200).send(marca_atualizada);
         };
-        
+
     } catch (erro: any) {
-      
-        res.status(500).json({message: erro.message});
+
+        reply.status(500).send({ message: erro.message });
     };
 };
 
-export async function delete_marca(req: Request, res: Response) {
+export async function delete_marca(req: FastifyRequest<{ Params: GetId }>, reply: FastifyReply) {
 
     try {
 
         const { id } = req.params;
-        const marca_deletada = await marcasServices.deletar_marca(id);
-        res.status(200).json({message: `Marca deletada com sucesso!`});
-        
+        await marcasServices.deletar_marca(String(id));
+        reply.status(200).send({ message: `Marca deletada com sucesso!` });
+
     } catch (erro: any) {
-      
-        res.status(500).json({message: erro.message});
+
+        reply.status(500).send({ message: erro.message });
     };
 };

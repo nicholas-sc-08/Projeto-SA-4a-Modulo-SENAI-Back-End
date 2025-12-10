@@ -1,13 +1,11 @@
-import { Router } from "express";
+import { FastifyInstance } from "fastify";
 import * as EstoqueController from "../Controllers/estoque.controller";
-import { autenticar_token } from "../middlewares/auth.middleware";
 
-const router_estoque = Router();
+export default async function router_estoque(app: FastifyInstance) {
 
-router_estoque.post("/", EstoqueController.post_estoque);
-router_estoque.get("/", EstoqueController.get_estoques);
-router_estoque.get("/:id", EstoqueController.get_estoque);
-router_estoque.put("/:id", EstoqueController.put_estoque);
-router_estoque.delete("/:id", EstoqueController.delete_estoque);
-
-export default router_estoque;
+    app.post("/", EstoqueController.post_estoque);
+    app.get("/", EstoqueController.get_estoques);
+    app.get("/:id", EstoqueController.get_estoque);
+    app.put("/:id", EstoqueController.put_estoque);
+    app.delete("/:id", EstoqueController.delete_estoque);
+};

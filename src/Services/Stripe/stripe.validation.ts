@@ -2,10 +2,10 @@ import z from "zod";
 
 export const createCheckoutSessionSchema = z.object({
 
-    body: z.object({
-        productId: z.string().nonempty(),
-        quantity: z.number().int().positive()
-    }),
+  body: z.object({
+    productId: z.string().nonempty(),
+    quantity: z.number().int().positive()
+  }),
 });
 
 export type CreateCheckoutSessionInput = z.infer<typeof createCheckoutSessionSchema>['body'];

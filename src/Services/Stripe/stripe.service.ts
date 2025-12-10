@@ -21,7 +21,7 @@ export const createCheckoutSession = async (produtos: ISacola[]) => {
         unit_amount: precoEmCentavos,
       },
 
-      
+
       quantity: produto.quantidade_selecionada ?? 1,
     };
   });

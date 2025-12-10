@@ -6,4 +6,3 @@ export const imagem_schema = z.object({
     imagem_dois: z.string().optional(),
     imagem_tres: z.string().optional()
 });
-

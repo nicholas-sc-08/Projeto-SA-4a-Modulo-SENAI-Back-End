@@ -1,9 +1,11 @@
-import { Request, Response } from "express";
+import { FastifyRequest, FastifyReply } from "fastify";
 import { pedido_completo_schema, pedido_completo_schema_update } from "../Services/Pedido/pedido_completo.validation";
 import * as ServicePedido from "../Services/Pedido/pedido.services";
-import { IPayload } from "../types/IPayload.types";
+import { IPayload, IPayloadUpdate } from "../types/IPayload.types";
+import { GetId } from "../types/IFastify";
+import { Params } from "zod/v4/core/api.cjs";
 
-export async function get_pedidos(req: Request, res: Response) {
+export async function get_pedidos(req: FastifyRequest, reply: FastifyReply) {
 
     try {
 
@@ -11,40 +13,40 @@ export async function get_pedidos(req: Request, res: Response) {
 
         if (!pedidos) {
 
-            res.status(404).json({ message: `Pedidos não encontrados!` });
+            reply.status(404).send({ message: `Pedidos não encontrados!` });
         } else {
 
-            res.status(200).json(pedidos);
+            reply.status(200).send(pedidos);
         };
 
     } catch (erro: any) {
 
-        res.status(500).json({ message: erro.message });
+        reply.status(500).send({ message: erro.message });
     };
 };
 
-export async function get_pedido(req: Request, res: Response) {
+export async function get_pedido(req: FastifyRequest<{ Params: GetId }>, reply: FastifyReply) {
 
     try {
 
         const { id } = req.params;
-        const pedido = await ServicePedido.buscar_pedido_pelo_id(id);
+        const pedido = await ServicePedido.buscar_pedido_pelo_id(String(id));
 
         if (!pedido) {
 
-            res.status(404).json({ message: `Pedido não encontrado!` });
+            reply.status(404).send({ message: `Pedido não encontrado!` });
         } else {
 
-            res.status(200).json(pedido);
+            reply.status(200).send(pedido);
         };
 
     } catch (erro: any) {
 
-        res.status(500).json({ message: erro.message });
+        reply.status(500).send({ message: erro.message });
     };
 };
 
-export async function post_pedido(req: Request, res: Response) {
+export async function post_pedido(req: FastifyRequest<{ Body: IPayload }>, reply: FastifyReply) {
 
     try {
 
@@ -60,20 +62,20 @@ export async function post_pedido(req: Request, res: Response) {
 
         if (!validar_pedido) {
 
-            res.status(401).json({ message: `Pedido não está válido para cadastrar` });
+            reply.status(401).send({ message: `Pedido não está válido para cadastrar` });
         } else {
 
             const pedido_enviado = await ServicePedido.enviar_pedido(payload_completo);
-            res.status(201).json(pedido_enviado);
+            reply.status(201).send(pedido_enviado);
         };
 
     } catch (erro: any) {
 
-        return res.status(500).json({ message: erro.message });
+        return reply.status(500).send({ message: erro.message });
     };
 };
 
-export async function put_pedido(req: Request, res: Response) {
+export async function put_pedido(req: FastifyRequest<{ Params: GetId, Body: IPayloadUpdate }>, reply: FastifyReply) {
 
     try {
 
@@ -83,29 +85,29 @@ export async function put_pedido(req: Request, res: Response) {
 
         if (!validar_pedido) {
 
-            res.status(401).json({ message: `Formato do pedido não está valido para atualizar!` });
+            reply.status(401).send({ message: `Formato do pedido não está valido para atualizar!` });
         } else {
 
-            const pedido = await ServicePedido.atualizar_pedido(id, data);
-            res.status(200).json(pedido);
+            const pedido = await ServicePedido.atualizar_pedido(String(id), data);
+            reply.status(200).send(pedido);
         };
 
     } catch (erro: any) {
 
-        res.status(500).json({ message: erro.message });
+        reply.status(500).send({ message: erro.message });
     };
 };
 
-export async function delete_pedido(req: Request, res: Response) {
+export async function delete_pedido(req: FastifyRequest<{ Params: GetId }>, reply: FastifyReply) {
 
     try {
 
         const { id } = req.params;
-        const deletar_pedido = await ServicePedido.deletar_pedido(id);
-        res.status(200).json({ message: `Pedido excluído com sucesso!` });
+        const deletar_pedido = await ServicePedido.deletar_pedido(String(id));
+        reply.status(200).send({ message: `Pedido excluído com sucesso!` });
 
     } catch (erro: any) {
 
-        res.status(500).json({ message: erro.message });
+        reply.status(500).send({ message: erro.message });
     };
 };

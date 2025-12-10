@@ -1,12 +1,10 @@
-import { Router } from "express";
+import { FastifyInstance } from "fastify";
 import multer from "multer";
 import { upload_file } from "../Controllers/upload.controller";
 import { autenticar_token } from "../middlewares/auth.middleware";
 
-const router_upload = Router();
-const upload = multer({ dest: `uploads/`});
 
-router_upload.use(autenticar_token);
-router_upload.post(`/upload`, upload.single(`file`), upload_file);
+export default async function router_upload(app: FastifyInstance) {
 
-export default router_upload;
+    app.post(`/upload`, { preHandler: autenticar_token }, upload_file);
+};

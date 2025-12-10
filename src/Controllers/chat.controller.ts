@@ -1,8 +1,9 @@
-import { Request, Response } from "express";
+import { FastifyRequest, FastifyReply } from "fastify";
 import { chat_schema, chat_update_schema } from "../Services/Chat/chat.validation";
 import * as chatServices from "../Services/Chat/chat.service";
+import { GetId } from "../types/IFastify";
 
-export async function get_chats(req: Request, res: Response) {
+export async function get_chats(req: FastifyRequest, reply: FastifyReply) {
 
     try {
 
@@ -10,37 +11,37 @@ export async function get_chats(req: Request, res: Response) {
 
         if (!chats) {
 
-            res.status(404).json({ message: `Chats não foram encontrados!` });
+            reply.status(404).send({ message: `Chats não foram encontrados!` });
         } else {
 
-            res.status(200).json(chats);
+            reply.status(200).send(chats);
         };
 
     } catch (erro: any) {
 
-        res.status(500).json({ message: erro.message });
+        reply.status(500).send({ message: erro.message });
     };
 };
 
-export async function get_chat(req: Request, res: Response) {
+export async function get_chat(req: FastifyRequest<{ Params: GetId }>, reply: FastifyReply) {
 
     try {
 
         const { id } = req.params;
-        const chat = await chatServices.buscar_chat_pelo_id(id);
+        const chat = await chatServices.buscar_chat_pelo_id(String(id));
 
         if (!chat) {
 
-            res.status(200).json(chat);
+            reply.status(200).send(chat);
         };
 
     } catch (erro: any) {
 
-        res.status(500).json({ message: erro.message });
+        reply.status(500).send({ message: erro.message });
     };
 };
 
-export async function post_chat(req: Request, res: Response) {
+export async function post_chat(req: FastifyRequest, reply: FastifyReply) {
 
     try {
 
@@ -49,20 +50,20 @@ export async function post_chat(req: Request, res: Response) {
 
         if (!chat_validado) {
 
-            res.status(401).json({ message: `Chat não está válido para cadastro!` });
+            reply.status(401).send({ message: `Chat não está válido para cadastro!` });
         } else {
 
             const chat_criado = await chatServices.cadastrar_chat(chat_validado);
-            res.status(201).json(chat_criado);
+            reply.status(201).send(chat_criado);
         };
 
     } catch (erro: any) {
 
-        res.status(500).json({ message: erro.message });
+        reply.status(500).send({ message: erro.message });
     };
 };
 
-export async function put_chat(req: Request, res: Response) {
+export async function put_chat(req: FastifyRequest<{ Params: GetId }>, reply: FastifyReply) {
 
     try {
 
@@ -72,29 +73,29 @@ export async function put_chat(req: Request, res: Response) {
 
         if (!chat_validado) {
 
-            res.status(401).json({ message: `Formato inválido para atualizar!` });
+            reply.status(401).send({ message: `Formato inválido para atualizar!` });
         } else {
 
-            const chat_atualizado = await chatServices.atualizar_chat(id, chat_validado);
-            res.status(200).json(chat_atualizado);
+            const chat_atualizado = await chatServices.atualizar_chat(String(id), chat_validado);
+            reply.status(200).send(chat_atualizado);
         };
 
     } catch (erro: any) {
 
-        res.status(500).json({ message: erro.message });
+        reply.status(500).send({ message: erro.message });
     };
 };
 
-export async function delete_chat(req: Request, res: Response) {
+export async function delete_chat(req: FastifyRequest<{ Params: GetId }>, reply: FastifyReply) {
 
     try {
 
         const { id } = req.params;
-        const chat_deletado = await chatServices.deletar_chat(id);
-        res.status(200).json({ message: `Chat deletado com sucesso!` });
+        await chatServices.deletar_chat(String(id));
+        reply.status(200).send({ message: `Chat deletado com sucesso!` });
 
     } catch (erro: any) {
 
-        res.status(500).json({ message: erro.message });
+        reply.status(500).send({ message: erro.message });
     };
 };
