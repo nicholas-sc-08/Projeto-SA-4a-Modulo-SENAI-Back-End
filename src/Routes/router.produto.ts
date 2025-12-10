@@ -10,7 +10,7 @@ import { IUpdateProduto } from "../types/IProduto.types";
 
 export default async function router_produto(app: FastifyInstance) {
 
-    app.get(`/`, { preHandler: autenticar_token }, get_produtos);
+    app.get(`/`, get_produtos);
     app.get<{ Params: GetId }>(`/:id`, { preHandler: autenticar_token }, get_produto_id);
     app.post(`/`, { preHandler: autenticar_token }, post_produto);
     app.put<{ Params: GetId, Body: IUpdateProduto }>(`/:id`, { preHandler: autenticar_token }, put_produto);
