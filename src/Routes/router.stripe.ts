@@ -1,11 +1,10 @@
-import { Router } from 'express';
+import { FastifyInstance } from 'fastify';
 import { handleCreateCheckout, handleCreateCheckoutBrecho } from '../Controllers/stripe.controller';
 import { autenticar_token } from '../middlewares/auth.middleware';
+import { CheckoutBodyBrecho, CheckoutBodyClient } from '../types/IPayload.types';
 
-const router_stripe = Router();
+export default async function router_stripe(app: FastifyInstance) {
 
-router_stripe.use(autenticar_token);
-router_stripe.post('/create-checkout-session', handleCreateCheckout);
-router_stripe.post('/create-checkout-session-brecho', handleCreateCheckoutBrecho);
-
-export default router_stripe;
+    app.post<{ Body: CheckoutBodyClient }>('/create-checkout-session', { preHandler: autenticar_token }, handleCreateCheckout);
+    app.post<{ Body: CheckoutBodyBrecho }>('/create-checkout-session-brecho', { preHandler: autenticar_token }, handleCreateCheckoutBrecho);
+};

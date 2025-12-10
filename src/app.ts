@@ -1,5 +1,7 @@
-import express from "express";
-import cors from "cors";
+import Fastify from "fastify";
+import fastifyFormbody from "@fastify/formbody";
+import cors from "@fastify/cors"
+import multipart from "@fastify/multipart";
 import router_produto from "./Routes/router.produto";
 import router_cliente from "./Routes/router.cliente";
 import router_categoria from "./Routes/router.categoria";
@@ -15,24 +17,24 @@ import router_stripe from "./Routes/router.stripe";
 import router_gemini from "./Routes/router.gemini";
 import router_auth from "./Routes/router.auth";
 
-const app = express();
+const app = Fastify({ logger: true });
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cors());
-app.use("/auth", router_auth);
-app.use(`/api/payments`, router_stripe);
-app.use(`/enderecos`, router_endereco);
-app.use(`/api`, router_upload);
-app.use(`/gemini`, router_gemini);
-app.use(`/pedidos`, router_pedido);
-app.use(`/sacolas_brechos`, router_sacola_brecho);
-app.use(`/produtos`, router_produto);
-app.use(`/clientes`, router_cliente);
-app.use(`/categorias`, router_categoria);
-app.use(`/brechos`, router_brecho);
-app.use(`/chats`, router_chat);
-app.use(`/marcas`, router_marca);
-app.use("/estoque", router_estoque);
+app.register(fastifyFormbody);
+app.register(cors);
+app.register(multipart)
+app.register(router_auth, { prefix: "/auth" });
+app.register(router_stripe, { prefix: "/api/payments" });
+app.register(router_endereco, { prefix: "/enderecos" });
+app.register(router_upload, { prefix: "/api" });
+app.register(router_gemini, { prefix: "/gemini" });
+app.register(router_pedido, { prefix: "/pedidos" });
+app.register(router_sacola_brecho, { prefix: "/sacolas_brechos" });
+app.register(router_produto, { prefix: "/produtos" });
+app.register(router_cliente, { prefix: "/clientes" });
+app.register(router_categoria, { prefix: "/categorias" });
+app.register(router_brecho, { prefix: "/brechos" });
+app.register(router_chat, { prefix: "/chats" });
+app.register(router_marca, { prefix: "/marcas" });
+app.register(router_estoque, { prefix: "/estoque" });
 
 export default app;

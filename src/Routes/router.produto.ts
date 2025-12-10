@@ -4,14 +4,15 @@ import { post_produto } from "../Controllers/produto.controller";
 import { put_produto } from "../Controllers/produto.controller";
 import { delete_produto } from "../Controllers/produto.controller";
 import { autenticar_token } from "../middlewares/auth.middleware";
+import { FastifyInstance } from "fastify";
+import { GetId } from "../types/IFastify";
+import { IUpdateProduto } from "../types/IProduto.types";
 
-const router_produto = Router();
+export default async function router_produto(app: FastifyInstance) {
 
-router_produto.get(`/`, get_produtos);
-router_produto.use(autenticar_token);
-router_produto.get(`/:id`, get_produto_id);
-router_produto.post(`/`, post_produto);
-router_produto.put(`/:id`, put_produto);
-router_produto.delete(`/:id`, delete_produto);
-
-export default router_produto;
+    app.get(`/`, get_produtos);
+    app.get<{ Params: GetId }>(`/:id`, { preHandler: autenticar_token }, get_produto_id);
+    app.post(`/`, { preHandler: autenticar_token }, post_produto);
+    app.put<{ Params: GetId, Body: IUpdateProduto }>(`/:id`, { preHandler: autenticar_token }, put_produto);
+    app.delete<{ Params: GetId }>(`/:id`, { preHandler: autenticar_token }, delete_produto);
+};

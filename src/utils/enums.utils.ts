@@ -35,7 +35,7 @@ export enum cores {
     branco = "branco",
     amarelo = "amarelo",
     marrom = "marrom",
-    areaia = "areia"    
+    areaia = "areia"
 };
 
 export enum andares_pedido {

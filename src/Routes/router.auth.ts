@@ -1,7 +1,7 @@
-import { Router } from "express";
+import { FastifyInstance } from "fastify";
 import { login } from "../Controllers/auth.controller";
 
-const router_auth: Router = Router();
-router_auth.post("/login", login);
+export default async function router_auth(app: FastifyInstance){
 
-export default router_auth;
+    app.post("/login", login);
+};

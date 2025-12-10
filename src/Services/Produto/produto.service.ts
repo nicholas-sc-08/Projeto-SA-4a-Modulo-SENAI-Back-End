@@ -2,7 +2,7 @@ import { ICreateProduto, IUpdateProduto } from "../../types/IProduto.types";
 import { IProduto } from "../../types/IProduto.types";
 import { ModelProduto } from "../../Models/ProdutoSchema.models";
 
-export async function buscar_produtos(): Promise<IProduto[] | null>  {
+export async function buscar_produtos(): Promise<IProduto[] | null> {
 
     try {
 
@@ -30,7 +30,7 @@ export async function buscar_produto_id(id_produto: string): Promise<IProduto | 
     };
 }
 
-export async function criar_produto(data: ICreateProduto): Promise<IProduto | null>  {
+export async function criar_produto(data: ICreateProduto): Promise<IProduto | null> {
 
     try {
 
@@ -63,9 +63,9 @@ export async function deletar_produto(id_produto: string): Promise<void> {
     try {
 
         const produto = await ModelProduto.findByIdAndDelete(id_produto);
-        
+
     } catch (erro) {
-  
+
         console.error(erro);
         throw new Error(`Falha ao deletar o produto`);
     };

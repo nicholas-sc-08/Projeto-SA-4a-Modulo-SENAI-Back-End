@@ -1,10 +1,8 @@
-import { Router } from "express";
+import { FastifyInstance } from "fastify";
 import { textController } from "../Controllers/gemini.controller";
 import { autenticar_token } from "../middlewares/auth.middleware";
 
-const router_gemini: Router = Router();
+export default async function router_gemini(app: FastifyInstance) {
 
-router_gemini.use(autenticar_token);
-router_gemini.post("/ai/generate", textController);
-
-export default router_gemini;
+    app.post("/ai/generate", { preHandler: autenticar_token }, textController);
+};
