@@ -1,14 +1,5 @@
 # ✈️ Fly - API RESTful para Moda Sustentável
 
-<img src="https://github.com/nicholas-sc-08/Projeto-SA-4a-Modulo-SENAI/blob/main/Imagens%20do%20README/Banner%20Fly.png" alt="Banner Fly" width="100%"/>
-
-<div style="margin-top: 10px"></div>
-
-[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/fly.circular/)
-[![Linkedin](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/fly-circular-76a172352/?locale=pt_BR)
-
----
-
 ## 📖 Descrição do Projeto
 
 O Fly é um aplicativo inovador que nasceu com o propósito de dar mais visibilidade aos brechós e facilitar a vida dos consumidores apaixonados pela moda sustentável. A plataforma permite que os usuários encontrem brechós e, através deles, descubram peças únicas, tornando possível fazer compras de forma prática e eficiente.
