@@ -29,6 +29,8 @@ Com isso, estamos desenvolvendo o Fly, um aplicativo pensado para conectar brech
 ![VS Code](https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=black)
 ![Windows Terminal](https://img.shields.io/badge/windows%20terminal-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white)
 
+---
+
 ## ⚙️ Iniciar o Back-End
 
 ### Pré-requisitos
