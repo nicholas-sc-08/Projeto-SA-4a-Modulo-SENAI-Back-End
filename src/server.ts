@@ -5,6 +5,6 @@ import http from "http";
 const port: number = Number(process.env.PORT);
 
 conect_mongo().then((): void => {
-    
-    app.listen({port}, (): void => console.log(`Servidor HTTP rodando com sucesso`));
+
+    app.listen({ port, host: '0.0.0.0' }, (): void => console.log(`Servidor HTTP rodando com sucesso`));
 });
